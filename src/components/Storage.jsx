@@ -15,7 +15,7 @@ const Storage = () => {
       try {
         const token = user ? `Bearer ${user.token}` : "";
         const response = await fetch(
-          `http://localhost:3000/form/${user.user.id}`,
+          `https://lastorage-server.vercel.app/form/${user.user.id}`,
           {
             method: "GET",
             headers: {
@@ -49,7 +49,7 @@ const Storage = () => {
   const handleDelete = async (id) => {
     try {
       const token = user ? `Bearer ${user.token}` : "";
-      const response = await fetch(`http://localhost:3000/form/${id}`, {
+      const response = await fetch(`https://lastorage-server.vercel.app/form/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

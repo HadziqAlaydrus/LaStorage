@@ -28,7 +28,7 @@ const FormStorage = () => {
 
     try {
       const token = user ? `Bearer ${user.token}` : ""; // Mengambil token dari konteks
-      const response = await fetch("http://localhost:3000/form", {
+      const response = await fetch("https://lastorage-server.vercel.app/form", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
