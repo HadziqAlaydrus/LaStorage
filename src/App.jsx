@@ -1,4 +1,3 @@
-
 import './App.css'
 import NavigationBar from './components/NavigationBar'
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -8,6 +7,7 @@ import SignUp from './pages/SignUp'
 import FormPage from './pages/FormPage'
 import Footer from './components/Footer'
 import Storage from './components/Storage'
+import UpdatePage from './pages/UpdatePage'
 
 function Layout({children}){
   return(
@@ -30,6 +30,7 @@ function App() {
           <Route path='/signup' element={<Layout><SignUp/></Layout>}></Route>
           <Route path='/form' element={<Layout><FormPage/></Layout>}></Route>
           <Route path='/storage' element={<Layout><Storage/></Layout>}></Route>
+          <Route path='/:id/update' element={<Layout><UpdatePage/></Layout>}></Route>
         </Routes>
       </Router>
     </>

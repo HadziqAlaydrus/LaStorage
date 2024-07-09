@@ -1,13 +1,25 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Storage = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useContext(AuthContext);
   const [forms, setForms] = useState([]);
+  const navigate = useNavigate();
+
+  const handleCreateStorageClick = () => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate("/form");
+    }
+  };
 
   useEffect(() => {
     const fetchForms = async () => {
-      if (!user || !user) {
+      if (!user || !user.user.id) {
         console.error("User or user.id is not defined");
         return;
       }
@@ -28,12 +40,10 @@ const Storage = () => {
         if (response.ok) {
           const data = await response.json();
           setForms(data);
+          checkExpirationDates(data);
         } else {
           const errorData = await response.json();
-          console.error(
-            "Failed to fetch forms:",
-            errorData.message || errorData
-          );
+          console.error("Failed to fetch forms:", errorData.message || errorData);
         }
       } catch (error) {
         console.error("Error fetching forms:", error.message || error);
@@ -44,7 +54,6 @@ const Storage = () => {
       fetchForms();
     }
   }, [user]);
-
 
   const handleDelete = async (id) => {
     try {
@@ -68,13 +77,48 @@ const Storage = () => {
     }
   };
 
+  const checkExpirationDates = (forms) => {
+    const today = new Date();
+    forms.forEach((form) => {
+      const expirationDate = new Date(form.tanggal_kadaluarsa);
+      const diffDays = (expirationDate - today) / (1000 * 60 * 60 * 24);
+      if (diffDays <= 7) {
+        toast.warning(
+          <div className="flex items-center">
+            <div className="mr-2">
+              <i className="fas fa-exclamation-triangle text-yellow-500"></i>
+            </div>
+            <div>
+              <strong>{form.nama_makanan}</strong> akan kadaluarsa dalam {Math.ceil(diffDays)} hari!
+            </div>
+          </div>,
+          {
+            className: "bg-white text-black rounded-lg shadow-md p-4",
+          }
+        );
+      }
+    });
+  };
+
   return (
     <section className="h-full relative p-10">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={true}
+        closeOnClick
+        pauseOnHover
+        draggable
+        className="w-full max-w-xs"
+      />
       <div>
-        <div className="card-actions  absolute right-0 top-0 p-2  ">
-          <a href="/form" className="bg-gray-300  rounded-md p-2 border border-2 border-black">
+        <div className="card-actions absolute right-0 top-0 p-2">
+          <button
+            onClick={handleCreateStorageClick}
+            className="bg-gray-300 rounded-md p-2 border border-black"
+          >
             Create Storage
-          </a>
+          </button>
         </div>
       </div>
 
@@ -87,11 +131,13 @@ const Storage = () => {
 
                 <p>Jumlah: {form.jumlah}</p>
                 <p>Tanggal Kadaluarsa: {form.tanggal_kadaluarsa}</p>
-                <p>Tanggal Dibuat/Dibeli : {form.tanggal_dibuat}</p>
-                <p>Tempat Penyimpanan : {form.tempat_penyimpanan}</p>
+                <p>Tanggal Dibuat/Dibeli: {form.tanggal_dibuat}</p>
+                <p>Tempat Penyimpanan: {form.tempat_penyimpanan}</p>
               </div>
               <div className="flex justify-end p-3 gap-2">
-                <button className="w-fit p-2 rounded-md border-black bg-gray-400">Update</button>
+                <a href={`/${form.id}/update`}className="w-fit p-2 rounded-md border-black bg-gray-400">
+                  Update
+                </a>
                 <button
                   className="w-fit p-2 rounded-md border-black bg-red-500"
                   onClick={() => handleDelete(form.id)}
@@ -99,7 +145,6 @@ const Storage = () => {
                   Delete
                 </button>
               </div>
-              
             </div>
           ))}
         </div>

@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaBagShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
@@ -7,20 +6,22 @@ import { AuthContext } from "../../AuthContext";
 const LoginCard = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
+    e.preventDefault();
     setLoading(true);
+    setError("Username or Password incorrect");
+
     try {
-      e.preventDefault();
       await login(username, password);
       navigate("/");
     } catch (error) {
-      console.log(error)
-    }finally{
-      setLoading(false)
+      setError("Username or password incorrect");
+      setLoading(false);
     }
   };
 
@@ -64,7 +65,9 @@ const LoginCard = () => {
                   required
                 />
               </div>
-
+              {error && (
+                <div className="text-red-500 text-sm text-center">{error}</div>
+              )}
               <button
                 disabled={loading}
                 type="submit"
