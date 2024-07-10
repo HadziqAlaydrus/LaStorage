@@ -26,19 +26,17 @@ const Storage = () => {
 
       try {
         const token = user ? `Bearer ${user.token}` : "";
-        const response = await fetch(
-          `https://lastorage-server.vercel.app/form/${user.user.id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: token,
-            },
-          }
-        );
+        const response = await fetch(`https://lastorage-server.vercel.app/form/${user.user.id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
+          console.log("Fetched forms:", data); // Debugging log
           setForms(data);
           checkExpirationDates(data);
         } else {
@@ -79,9 +77,11 @@ const Storage = () => {
 
   const checkExpirationDates = (forms) => {
     const today = new Date();
+    console.log("Checking expiration dates for forms:", forms); // Debugging log
     forms.forEach((form) => {
       const expirationDate = new Date(form.tanggal_kadaluarsa);
       const diffDays = (expirationDate - today) / (1000 * 60 * 60 * 24);
+      console.log(`Form ${form.nama_makanan} expires in ${Math.ceil(diffDays)} days`); // Debugging log
       if (diffDays <= 7) {
         toast.warning(
           <div className="flex items-center">
@@ -135,7 +135,7 @@ const Storage = () => {
                 <p>Tempat Penyimpanan: {form.tempat_penyimpanan}</p>
               </div>
               <div className="flex justify-end p-3 gap-2">
-                <a href={`/${form.id}/update`}className="w-fit p-2 rounded-md border-black bg-gray-400">
+                <a href={`/${form.id}/update`} className="w-fit p-2 rounded-md border-black bg-gray-400">
                   Update
                 </a>
                 <button

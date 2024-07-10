@@ -14,7 +14,7 @@ const LoginCard = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("Username or Password incorrect");
+    setError("");
 
     try {
       await login(username, password);
