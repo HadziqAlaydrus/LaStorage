@@ -5,7 +5,7 @@ import Jumbotron from '../components/Jumbotron'
 
 const Home = () => {
   return (
-    <section className='min-h-[81vh]'>
+    <section className=''>
         <Jumbotron/>
         <CardFaq/>
     </section>

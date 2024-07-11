@@ -36,7 +36,7 @@ const Storage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Fetched forms:", data); // Debugging log
+          console.log("Fetched forms:", data);
           setForms(data);
           checkExpirationDates(data);
         } else {
@@ -77,11 +77,11 @@ const Storage = () => {
 
   const checkExpirationDates = (forms) => {
     const today = new Date();
-    console.log("Checking expiration dates for forms:", forms); // Debugging log
+    console.log("Checking expiration dates for forms:", forms); 
     forms.forEach((form) => {
       const expirationDate = new Date(form.tanggal_kadaluarsa);
       const diffDays = (expirationDate - today) / (1000 * 60 * 60 * 24);
-      console.log(`Form ${form.nama_makanan} expires in ${Math.ceil(diffDays)} days`); // Debugging log
+      console.log(`Form ${form.nama_makanan} expires in ${Math.ceil(diffDays)} days`); 
       if (diffDays <= 7) {
         toast.warning(
           <div className="flex items-center">
@@ -101,7 +101,7 @@ const Storage = () => {
   };
 
   return (
-    <section className="h-full relative p-10">
+    <section className="h-full relative p-10 bg-gradient-to-bl from-teal-400 via-blue-500 to-cyan-600">
       <ToastContainer
         position="top-right"
         autoClose={5000}

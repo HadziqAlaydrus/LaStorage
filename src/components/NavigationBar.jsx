@@ -36,9 +36,9 @@ const NavigationBar = () => {
             >
               {isAuthenticated && user ? (
                 <>
-                  <div className="flex flex-col gap-1">
-                    <p className="text-black ">Hi! {user.user.nama}</p>
-                    <p>{user.user.email}</p>
+                  <div className="flex flex-col gap-1 p-1">
+                    <p className="font-bold hover:bg-gray-200 rounded-box p-2 w-full">Hi! {user.user.nama}</p>
+                    <p className="underline font-semibold hover:bg-gray-200 rounded-box p-2 w-full">{user.user.email}</p>
                   </div>
                   <li>
                     <a href="/" onClick={logout}>

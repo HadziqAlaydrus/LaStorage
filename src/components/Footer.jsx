@@ -5,7 +5,7 @@ import { FaInstagram } from "react-icons/fa";
 const Footer = () => {
   return (
     <section className="">
-      <footer className="footer bg-gray-200 text-black items-center p-4">
+      <footer className="footer bg-gray-300 text-black items-center p-4">
         <aside className="grid-flow-col items-center">
           <p>
             Copyright © Hadziq Alaydrus {new Date().getFullYear()} - All right

@@ -5,7 +5,7 @@ import UpdateStorage from '../components/UpdateStorage'
 const UpdatePage = () => {
   const {id} = useParams() 
   return (
-    <section>
+    <section className='max-w-screen p-20'>
         <UpdateStorage id={id}/>
     </section>
   )
