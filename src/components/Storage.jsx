@@ -93,7 +93,7 @@ const Storage = () => {
             </div>
           </div>,
           {
-            className: "bg-white text-black rounded-lg shadow-md p-4",
+            className: "bg-white text-black rounded-lg shadow-md p-4 w-full sm:w-auto",
           }
         );
       }
@@ -101,7 +101,7 @@ const Storage = () => {
   };
 
   return (
-    <section className="h-full relative p-10 bg-gradient-to-bl from-teal-400 via-blue-500 to-cyan-600">
+    <section className="h-full relative p-5 md:p-10 bg-gradient-to-bl from-teal-400 via-blue-500 to-cyan-600">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -109,7 +109,7 @@ const Storage = () => {
         closeOnClick
         pauseOnHover
         draggable
-        className="w-full max-w-xs"
+        className="w-full sm:max-w-xs"
       />
       <div>
         <div className="card-actions absolute right-0 top-0 p-2">
@@ -123,9 +123,9 @@ const Storage = () => {
       </div>
 
       {forms.length > 0 && (
-        <div className="grid grid-cols-3 items-center justify-center mx-auto my-10 gap-5 w-fit">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center justify-center mx-auto my-10 gap-5 w-full">
           {forms.map((form) => (
-            <div key={form.id} className="card bg-base-100 w-96 shadow-xl">
+            <div key={form.id} className="card bg-base-100 shadow-xl">
               <div className="card-body">
                 <h2 className="card-title">{form.nama_makanan}</h2>
 

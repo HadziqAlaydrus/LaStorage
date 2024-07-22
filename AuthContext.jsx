@@ -28,9 +28,8 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const userData = await response.json();
-        setUser(userData); // Set user data received from server
+        setUser(userData);
         setIsAuthenticated(true);
-        // Simpan ke sessionStorage
         sessionStorage.setItem("user", JSON.stringify(userData));
       } else {
         console.error("Login failed");
@@ -43,7 +42,6 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsAuthenticated(false);
     setUser(null);
-    // Hapus dari sessionStorage
     sessionStorage.removeItem("user");
   };
 
