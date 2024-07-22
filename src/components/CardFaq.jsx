@@ -8,7 +8,7 @@ const CardFaq = () => {
           <input type="radio" name="my-accordion-2" id="faq1" defaultChecked />
           <label htmlFor="faq1" className="collapse-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-600 cursor-pointer">
             Apa itu La Storage?
-          </label>
+          </label>  
           <div className="collapse-content text-base sm:text-lg lg:text-xl text-gray-600">
             <p>
               La Storage adalah sebuah website yang dapat membantu kamu untuk mencatat makan frozen food yang ada di tempat penyimpanan kalian.
@@ -22,7 +22,7 @@ const CardFaq = () => {
           </label>
           <div className="collapse-content text-base sm:text-lg lg:text-xl text-gray-600">
             <p>
-              
+              Web ini dapat memberikan kamu pemberitahuan jika makanan kamu sudah seminggu lagi kadaluarsa, jika kamu sudah membuat storage, kamu dapat langsung menekan MyStorage dan melihat pemberitahuannya disana.
             </p>
           </div>
         </div>
@@ -33,7 +33,7 @@ const CardFaq = () => {
           </label>
           <div className="collapse-content text-base sm:text-lg lg:text-xl text-gray-600">
             <p>
-              
+              Pastikan kamu sudah melakukan signup bagi kamu yang belum membuat akun, jika sudah membuat akun kalian hanya perlu login dan klik tombol create storage dan input data-data yang ada disana.
             </p>
           </div>
         </div>
