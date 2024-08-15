@@ -82,7 +82,22 @@ const Storage = () => {
       const expirationDate = new Date(form.tanggal_kadaluarsa);
       const diffDays = (expirationDate - today) / (1000 * 60 * 60 * 24);
       console.log(`Form ${form.nama_makanan} expires in ${Math.ceil(diffDays)} days`); 
-      if (diffDays <= 7) {
+      
+      if (diffDays <= 0) {
+        toast.error(
+          <div className="flex items-center">
+            <div className="mr-2">
+              <i className="fas fa-times-circle text-red-500"></i>
+            </div>
+            <div>
+              <strong>{form.nama_makanan}</strong> sudah kadaluarsa!
+            </div>
+          </div>,
+          {
+            className: "bg-white text-black rounded-lg shadow-md p-4 w-full sm:w-auto",
+          }
+        );
+      } else if (diffDays <= 7) {
         toast.warning(
           <div className="flex items-center">
             <div className="mr-2">

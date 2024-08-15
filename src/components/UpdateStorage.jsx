@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const UpdateStorage = ({ id }) => {
   const [form, setForm] = useState({
@@ -9,6 +11,7 @@ const UpdateStorage = ({ id }) => {
     jumlah: "",
     tempat_penyimpanan: "",
   });
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Fetch the existing data for the given ID
@@ -46,6 +49,7 @@ const UpdateStorage = ({ id }) => {
         form
       );
       console.log(response.data.message);
+        navigate("/storage")
     } catch (error) {
       console.error("Error updating storage:", error);
       alert("Error updating storage");
